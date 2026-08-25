@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContactHero from "@/components/contact/ContactHero.astro";
+import ContactInfo from "@/components/contact/ContactInfo.astro";
+import ContactForm from "@/components/contact/ContactForm.astro";
+import ContactMap from "@/components/contact/ContactMap.astro";
+import CTA from "@/components/home/CTA.astro";
+import { site } from "@/data/site";
+
+const title = "Contact GM TECH & ENGINEERING | Swimming Pool Services";
+const description = "Contact GM TECH & ENGINEERING for swimming pool construction, repair, maintenance, equipment, water features, spa and pond solutions.";
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Contact", item: `${site.url}/contact` },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    url: site.url,
+    description: site.tagline,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/contact`} structuredData={structuredData}>
+  <ContactHero />
+  <ContactInfo />
+  <ContactForm />
+  <ContactMap />
+  <CTA />
+</BaseLayout>

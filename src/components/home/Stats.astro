@@ -1,0 +1,44 @@
+---
+const stats = [
+  ["Pool & Water", "Solutions"],
+  ["Engineering", "Expertise"],
+  ["7", "Service Categories"],
+  ["Residential + Commercial", "Support"],
+];
+---
+
+<section class="stats" aria-label="Service statistics">
+  <div class="container stats__grid">
+    {stats.map(([value, label]) => (
+      <div class="stat" data-reveal>
+        <strong data-counter={value}>{value}</strong>
+        <span>{label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const counters = document.querySelectorAll<HTMLElement>("[data-counter]");
+  const animateCounter = (el: HTMLElement) => {
+    const target = Number(el.dataset.counter);
+    if (!Number.isFinite(target)) return;
+    const duration = 900;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      el.textContent = String(Math.round(target * progress));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target as HTMLElement);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  });
+  counters.forEach((counter) => counterObserver.observe(counter));
+</script>

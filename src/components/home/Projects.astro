@@ -1,0 +1,45 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import { imageLibrary } from "@/data/site";
+const projects = [
+  {
+    title: "Pool Construction",
+    image: imageLibrary.construction,
+    alt: "Swimming pool construction project with tiled shell and integrated pool fittings",
+  },
+  {
+    title: "Pool Renovation",
+    image: imageLibrary.renovation,
+    alt: "Modern residential swimming pool renovation with timber pool deck",
+  },
+  {
+    title: "Water Features",
+    image: imageLibrary.feature,
+    alt: "Decorative fountain jets flowing into a blue swimming pool water feature",
+  },
+  {
+    title: "Jacuzzi & Spa",
+    image: imageLibrary.wellness,
+    alt: "Premium outdoor hot tubs for Jacuzzi and spa installation projects",
+  },
+  {
+    title: "Pool Maintenance",
+    image: imageLibrary.maintenance,
+    alt: "Pool maintenance technician cleaning a swimming pool with a service pole",
+  },
+];
+---
+
+<section class="section projects">
+  <div class="container">
+    <SectionHeading eyebrow="Project showcase" title="Pool environments with a refined technical finish" text="A visual direction for the kinds of pool, water feature, wellness and maintenance work the site can showcase as real project images become available." />
+    <div class="project-gallery">
+      {projects.map(({ title, image, alt }, index) => (
+        <figure class:list={["project-card", index === 0 && "project-card--large"]} data-reveal>
+          <img src={image} alt={alt} width="1200" height="800" loading="lazy" decoding="async" />
+          <figcaption>{title}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

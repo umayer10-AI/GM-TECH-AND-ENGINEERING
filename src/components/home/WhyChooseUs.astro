@@ -1,0 +1,25 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+const points = [
+  "Complete End-to-End Service",
+  "Skilled Technical Team",
+  "Quality Materials & Equipment",
+  "Professional Project Management",
+  "Reliable Maintenance Support",
+  "Residential & Commercial Experience",
+];
+---
+
+<section class="section why">
+  <div class="container why__grid">
+    <SectionHeading eyebrow="Why choose us" title="A disciplined approach to pool engineering" text="The right pool partner should understand construction quality, system reliability, water quality, and maintenance realities." />
+    <div class="why__list">
+      {points.map((point, index) => (
+        <article data-reveal>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h3>{point}</h3>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

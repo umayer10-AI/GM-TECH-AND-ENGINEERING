@@ -1,0 +1,28 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+export const faqs = [
+  ["What swimming pool services do you provide?", "GM TECH & ENGINEERING provides swimming pool construction, repair, renovation, maintenance, equipment, water feature, spa and pond system services."],
+  ["Do you provide swimming pool repair services?", "Yes. Repair services include leak repair, pump and filter repair, plumbing repair, underwater repair, retiling, deck repair and light replacement."],
+  ["Can you renovate an existing swimming pool?", "Yes. Existing pools can be renovated through refurbishment, waterproofing, flooring, tiling, equipment updates and finish improvements."],
+  ["Do you provide regular pool maintenance?", "Yes. Regular support can include swimming pool cleaning, weekly or monthly maintenance, chemical balancing and green pool restoration."],
+  ["Can you install pool pumps and filtration systems?", "Yes. The company can install pool pumps, filtration systems, water treatment systems and related pool equipment."],
+  ["Do you provide pool waterproofing?", "Yes. Pool waterproofing is included within construction and renovation services."],
+  ["Do you install Jacuzzi and spa systems?", "Yes. Jacuzzi installation, spa pools, sauna rooms and steam rooms are part of the wellness service category."],
+  ["Do you build water features and ponds?", "Yes. Services include water feature installation, fountains, mist and fog systems, water play, bio ponds, lily ponds and pond maintenance."],
+  ["How can I request a quotation?", "Use the contact form or quote buttons on the website to share your service need and project type."],
+];
+---
+
+<section class="section faq">
+  <div class="container faq__grid">
+    <SectionHeading eyebrow="FAQ" title="Common pool service questions" text="Quick answers for construction, repair, maintenance, equipment, wellness and water feature requests." />
+    <div class="faq__items">
+      {faqs.map(([question, answer]) => (
+        <details data-reveal>
+          <summary>{question}</summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

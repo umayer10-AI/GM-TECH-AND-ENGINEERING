@@ -1,0 +1,41 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { serviceCategories } from "@/data/services";
+import { site } from "@/data/site";
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a class="brand brand--footer" href="/">
+        <span class="brand__mark">GM</span>
+        <span>{site.name}</span>
+      </a>
+      <p>{site.tagline}</p>
+      <div class="socials" aria-label="Social media links">
+        {site.social.map((item) => <a href={item.href} aria-label={item.label}>{item.label.slice(0, 2)}</a>)}
+      </div>
+    </div>
+    <div class="footer__column">
+      <h2>Company</h2>
+      <a href="/">Home</a>
+      <a href="/#about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="#" aria-disabled="true">Privacy Policy</a>
+    </div>
+    <div class="footer__column">
+      <h2>Services</h2>
+      {serviceCategories.map((category) => <a href={`/#${category.slug}`}>{category.name}</a>)}
+    </div>
+    <div class="footer__column footer__contact">
+      <h2>Contact</h2>
+      <p><Icon name="phone" />{site.phone}</p>
+      <p><Icon name="mail" />{site.email}</p>
+      <p><Icon name="map" />{site.address}</p>
+      <p>{site.hours}</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>Copyright {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+  </div>
+</footer>

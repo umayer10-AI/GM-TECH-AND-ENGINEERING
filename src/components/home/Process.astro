@@ -1,0 +1,25 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+const steps = [
+  ["Consultation", "Understand project goals, property type, scope, timeline, and service requirements."],
+  ["Site Assessment", "Review site conditions, existing systems, access, visible defects, and technical constraints."],
+  ["Planning & Proposal", "Prepare practical recommendations, scope, equipment direction, and delivery approach."],
+  ["Installation / Repair", "Carry out construction, repair, renovation, equipment, or maintenance work with care."],
+  ["Testing & Handover", "Check operation, water systems, finish quality, and next-step maintenance guidance."],
+];
+---
+
+<section class="section process">
+  <div class="container">
+    <SectionHeading eyebrow="Our process" title="Clear steps from first call to handover" align="center" />
+    <div class="process-line" data-reveal>
+      {steps.map(([title, text], index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

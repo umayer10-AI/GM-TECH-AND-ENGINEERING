@@ -1,0 +1,109 @@
+---
+import { contactServiceOptions } from "@/data/services";
+const projectTypes = ["Residential", "Commercial", "Condominium", "Hotel / Resort", "School / Institution", "Other"];
+---
+
+<section class="section form-section" id="contact-form">
+  <div class="container form-grid">
+    <div class="form-intro" data-reveal>
+      <p class="eyebrow">Request a quote</p>
+      <h2>Tell us what your pool needs</h2>
+      <p>
+        Share the service category, project type and message. This form is prepared for frontend validation and
+        can be connected to a backend or form provider when contact details are finalized.
+      </p>
+    </div>
+    <form class="contact-form" novalidate data-reveal>
+      <div class="form-field">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" name="fullName" autocomplete="name" required minlength="2" />
+        <span class="error" data-error-for="fullName"></span>
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone Number</label>
+        <input id="phone" name="phone" autocomplete="tel" required />
+        <span class="error" data-error-for="phone"></span>
+      </div>
+      <div class="form-field">
+        <label for="email">Email Address</label>
+        <input id="email" name="email" autocomplete="email" type="email" required />
+        <span class="error" data-error-for="email"></span>
+      </div>
+      <div class="form-field">
+        <label for="service">Service Required</label>
+        <select id="service" name="service" required>
+          <option value="">Select a service</option>
+          {contactServiceOptions.map((option) => <option>{option}</option>)}
+        </select>
+        <span class="error" data-error-for="service"></span>
+      </div>
+      <div class="form-field">
+        <label for="projectType">Property / Project Type</label>
+        <select id="projectType" name="projectType" required>
+          <option value="">Select project type</option>
+          {projectTypes.map((option) => <option>{option}</option>)}
+        </select>
+        <span class="error" data-error-for="projectType"></span>
+      </div>
+      <div class="form-field form-field--full">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required minlength="10"></textarea>
+        <span class="error" data-error-for="message"></span>
+      </div>
+      <div class="form-actions form-field--full">
+        <button class="button button--primary" type="submit"><span>Prepare Request</span><span class="button__arrow">-&gt;</span></button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  const messages: Record<string, string> = {
+    fullName: "Please enter your full name.",
+    phone: "Please enter a phone number.",
+    email: "Please enter a valid email address.",
+    service: "Please choose a service category.",
+    projectType: "Please choose a project type.",
+    message: "Please add a short message with at least 10 characters.",
+  };
+
+  const showError = (field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => {
+    const error = form?.querySelector<HTMLElement>(`[data-error-for="${field.name}"]`);
+    if (!error) return;
+    error.textContent = field.validity.valid ? "" : messages[field.name] ?? "Please complete this field.";
+    field.toggleAttribute("aria-invalid", !field.validity.valid);
+  };
+
+  form?.addEventListener("input", (event) => {
+    const field = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    if (field.name) showError(field);
+  });
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const fields = Array.from(form.elements).filter(
+      (element): element is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+        element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement
+    );
+    fields.forEach(showError);
+    const status = form.querySelector<HTMLElement>(".form-status");
+    if (!form.checkValidity()) {
+      status && (status.textContent = "Please fix the highlighted fields.");
+      return;
+    }
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+    if (button) {
+      button.disabled = true;
+      button.querySelector("span")!.textContent = "Preparing...";
+    }
+    window.setTimeout(() => {
+      status && (status.textContent = "Your request is ready. Connect this form to a backend or form provider to send it.");
+      if (button) {
+        button.disabled = false;
+        button.querySelector("span")!.textContent = "Prepare Request";
+      }
+    }, 650);
+  });
+</script>

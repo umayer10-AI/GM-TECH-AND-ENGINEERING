@@ -1,0 +1,36 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { serviceCategories } from "@/data/services";
+---
+
+<section class="section" id="services">
+  <div class="container">
+    <SectionHeading
+      eyebrow="Services"
+      title="Complete Pool & Water Engineering Services"
+      text="GM TECH & ENGINEERING handles everything from pool construction and maintenance to equipment, wellness facilities, water features and pond systems."
+      align="center"
+    />
+    <div class="services-grid">
+      {serviceCategories.map((category) => (
+        <article class="service-card" id={category.slug} data-reveal>
+          <div class="service-card__top">
+            <span><Icon name={category.icon} /></span>
+            <h3>{category.name}</h3>
+          </div>
+          <p>{category.description}</p>
+          <ul>
+            {category.featured?.map((item) => <li>{item}</li>)}
+          </ul>
+          <details>
+            <summary>Explore Services</summary>
+            <div class="service-card__details">
+              {category.services.map((service) => <a href="/contact#contact-form">{service}</a>)}
+            </div>
+          </details>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

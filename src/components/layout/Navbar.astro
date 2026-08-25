@@ -1,0 +1,144 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { serviceCategories } from "@/data/services";
+import { site } from "@/data/site";
+---
+
+<header class="site-header">
+  <nav class="navbar" aria-label="Primary navigation">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <span class="brand__mark">GM</span>
+      <span class="brand__text">{site.name}</span>
+    </a>
+
+    <div class="navlinks">
+      <a href="/">Home</a>
+      <div class="mega-trigger">
+        <button class="nav-button" type="button" aria-expanded="false" aria-haspopup="true">
+          Services <Icon name="chevron" />
+        </button>
+        <div class="mega-menu" aria-label="Services menu">
+          <div class="mega-menu__intro">
+            <p class="eyebrow">Services</p>
+            <h2>Complete pool and water engineering</h2>
+            <p>Browse categories without leaving the homepage. Each link scrolls to the relevant service section.</p>
+            <a href="/#services" class="mega-menu__all">View service categories -&gt;</a>
+          </div>
+          <div class="mega-menu__grid">
+            {serviceCategories.map((category) => (
+              <section class="mega-category" aria-labelledby={`mega-${category.slug}`}>
+                <a class="mega-category__heading" href={`/#${category.slug}`} id={`mega-${category.slug}`}>
+                  <span class="mega-card__icon"><Icon name={category.icon} /></span>
+                  <span>{category.name}</span>
+                </a>
+                <ul>
+                  {category.services.map((service) => (
+                    <li>
+                      <a href={`/#${category.slug}`}>{service}</a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+      </div>
+      <a href="/#about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <a class="quote-link" href="/contact#contact-form">Get a Quote</a>
+
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+      <Icon name="menu" />
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <a href="/">Home</a>
+    <details>
+      <summary>Services</summary>
+      <div class="mobile-services">
+        {serviceCategories.map((category) => (
+          <details>
+            <summary>
+              <span><Icon name={category.icon} />{category.name}</span>
+            </summary>
+            <div class="mobile-services__links">
+              {category.services.map((service) => <a href={`/#${category.slug}`}>{service}</a>)}
+            </div>
+          </details>
+        ))}
+      </div>
+    </details>
+    <a href="/#about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/contact#contact-form" class="quote-link quote-link--mobile">Get a Quote</a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const mobileMenu = document.querySelector<HTMLElement>("#mobile-menu");
+  const megaTrigger = document.querySelector<HTMLElement>(".mega-trigger");
+  const serviceButton = megaTrigger?.querySelector<HTMLButtonElement>(".nav-button");
+  const megaMenu = megaTrigger?.querySelector<HTMLElement>(".mega-menu");
+  const iconPath = toggle?.querySelector("path");
+  const closePath = "M6 6l12 12M18 6 6 18";
+  const menuPath = "M4 6h16M4 12h16M4 18h16";
+  let megaCloseTimer: number | undefined;
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+    if (mobileMenu) {
+      mobileMenu.hidden = isOpen;
+      mobileMenu.classList.toggle("is-open", !isOpen);
+    }
+    if (iconPath) iconPath.setAttribute("d", isOpen ? menuPath : closePath);
+  });
+
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      if (mobileMenu) {
+        mobileMenu.hidden = true;
+        mobileMenu.classList.remove("is-open");
+      }
+      if (iconPath) iconPath.setAttribute("d", menuPath);
+    });
+  });
+
+  const openMega = () => {
+    window.clearTimeout(megaCloseTimer);
+    megaTrigger?.classList.add("is-open");
+    serviceButton?.setAttribute("aria-expanded", "true");
+  };
+
+  const closeMega = () => {
+    megaCloseTimer = window.setTimeout(() => {
+      megaTrigger?.classList.remove("is-open");
+      serviceButton?.setAttribute("aria-expanded", "false");
+    }, 140);
+  };
+
+  megaTrigger?.addEventListener("mouseenter", openMega);
+  megaTrigger?.addEventListener("mouseleave", closeMega);
+  megaMenu?.addEventListener("mouseenter", openMega);
+  megaMenu?.addEventListener("mouseleave", closeMega);
+  megaTrigger?.addEventListener("focusin", openMega);
+  megaTrigger?.addEventListener("focusout", (event) => {
+    if (!megaTrigger.contains(event.relatedTarget as Node | null)) {
+      closeMega();
+    }
+  });
+  megaTrigger?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      window.clearTimeout(megaCloseTimer);
+      megaTrigger.classList.remove("is-open");
+      serviceButton?.setAttribute("aria-expanded", "false");
+      serviceButton?.focus();
+    }
+  });
+</script>

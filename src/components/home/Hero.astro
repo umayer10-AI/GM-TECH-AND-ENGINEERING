@@ -1,0 +1,40 @@
+---
+import Button from "@/components/ui/Button.astro";
+import { imageLibrary } from "@/data/site";
+---
+
+<section class="hero">
+  <div class="hero__media" aria-hidden="true">
+    <img
+      src={imageLibrary.hero}
+      alt="Underwater swimming pool tile lanes with clear blue water for GM TECH & ENGINEERING"
+      width="1024"
+      height="1536"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <p class="eyebrow" data-reveal>Swimming pool engineering specialists</p>
+    <h1 data-reveal>Complete Swimming Pool Engineering Solutions</h1>
+    <p data-reveal>
+      GM TECH & ENGINEERING provides professional swimming pool construction, repair, maintenance,
+      equipment, water feature, pond and wellness solutions for residential and commercial properties.
+    </p>
+    <div class="hero__actions" data-reveal>
+      <Button href="/contact#contact-form" label="Get a Free Quote" />
+      <Button href="#services" label="Explore Our Services" variant="secondary" />
+    </div>
+    <div class="trust-strip" aria-label="Company strengths" data-reveal>
+      <span>Complete Pool Solutions</span>
+      <span>Professional Engineering</span>
+      <span>Residential & Commercial</span>
+      <span>Quality Workmanship</span>
+    </div>
+  </div>
+  <div class="hero__panel" data-reveal>
+    <span>Integrated delivery</span>
+    <strong>Design, construction, systems and ongoing care planned as one reliable pool solution.</strong>
+  </div>
+</section>

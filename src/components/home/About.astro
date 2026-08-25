@@ -1,0 +1,41 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import { imageLibrary } from "@/data/site";
+---
+
+<section class="section about" id="about">
+  <div class="container about__grid">
+    <div class="about__image" data-reveal>
+      <img
+        src={imageLibrary.about}
+        alt="Luxury resort swimming pool with premium water engineering finish by GM TECH & ENGINEERING"
+        width="1400"
+        height="933"
+        loading="lazy"
+        decoding="async"
+      />
+      <div>
+        <strong>Built for long-term performance</strong>
+        <span>Residential and commercial pool systems</span>
+      </div>
+    </div>
+    <div class="about__content">
+      <SectionHeading eyebrow="About GM TECH & ENGINEERING" title="Engineering Better Pool & Water Solutions" />
+      <p data-reveal>
+        GM TECH & ENGINEERING provides complete swimming pool, spa, water feature and pond engineering services
+        with a practical focus on technical expertise, quality workmanship and reliable project delivery.
+      </p>
+      <p data-reveal>
+        From new pool construction to system renovation, equipment installation, waterproofing and routine care,
+        the work is planned around long-term system performance for homes, hotels, developers, schools, clubs and
+        property management teams.
+      </p>
+      <div class="about__points" data-reveal>
+        <span>Technical expertise</span>
+        <span>Quality workmanship</span>
+        <span>Practical solutions</span>
+        <span>Reliable delivery</span>
+      </div>
+    </div>
+  </div>
+</section>

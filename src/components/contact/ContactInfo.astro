@@ -1,0 +1,24 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { contactItems } from "@/data/site";
+const iconMap: Record<string, string> = {
+  Phone: "phone",
+  WhatsApp: "phone",
+  Email: "mail",
+  Address: "map",
+  "Business Hours": "maintenance",
+};
+---
+
+<section class="section contact-info">
+  <div class="container contact-info__grid">
+    {contactItems.map((item) => (
+      <article class="contact-card" data-reveal>
+        <Icon name={iconMap[item.label]} />
+        <h2>{item.label}</h2>
+        <p>{item.value}</p>
+        {item.note && <small>{item.note}</small>}
+      </article>
+    ))}
+  </div>
+</section>

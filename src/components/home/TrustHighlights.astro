@@ -1,0 +1,21 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+const highlights = [
+  ["construction", "Professional Engineering", "Technical planning and site-aware execution for dependable long-term performance."],
+  ["feature", "Complete Pool Solutions", "Construction, repair, maintenance, equipment, wellness, water features, and ponds."],
+  ["equipment", "Quality Materials", "Practical product and system choices for durable, efficient pool operation."],
+  ["maintenance", "Reliable Support", "Responsive care for routine maintenance, troubleshooting, and project handover."],
+];
+---
+
+<section class="section trust-section">
+  <div class="container trust-grid">
+    {highlights.map(([icon, title, text]) => (
+      <article class="highlight-card" data-reveal>
+        <Icon name={icon} />
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+</section>

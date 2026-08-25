@@ -1,0 +1,61 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/home/Hero.astro";
+import TrustHighlights from "@/components/home/TrustHighlights.astro";
+import Services from "@/components/home/Services.astro";
+import FeaturedServices from "@/components/home/FeaturedServices.astro";
+import About from "@/components/home/About.astro";
+import WhyChooseUs from "@/components/home/WhyChooseUs.astro";
+import Process from "@/components/home/Process.astro";
+import Projects from "@/components/home/Projects.astro";
+import Stats from "@/components/home/Stats.astro";
+import Testimonials from "@/components/home/Testimonials.astro";
+import FAQ, { faqs } from "@/components/home/FAQ.astro";
+import CTA from "@/components/home/CTA.astro";
+import { serviceCategories } from "@/data/services";
+import { site } from "@/data/site";
+
+const title = "Swimming Pool Engineering, Repair & Maintenance | GM TECH & ENGINEERING";
+const description = "Professional swimming pool construction, repair, maintenance, equipment, waterproofing, Jacuzzi, water feature and pond services by GM TECH & ENGINEERING.";
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: site.url,
+    description: site.tagline,
+    makesOffer: serviceCategories.map((category) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: category.name,
+        description: category.description,
+      },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonical={site.url} structuredData={structuredData}>
+  <Hero />
+  <Stats />
+  <TrustHighlights />
+  <Services />
+  <FeaturedServices />
+  <About />
+  <WhyChooseUs />
+  <Process />
+  <Projects />
+  <Testimonials />
+  <FAQ />
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+const testimonials = [
+  ["Residential pool owner", "The team helped us understand what needed repair and how to keep the pool easier to maintain."],
+  ["Property manager", "A practical service partner for pool maintenance, equipment checks and water quality needs."],
+  ["Hospitality project team", "The proposal was clear, technical and focused on durable solutions rather than quick fixes."],
+  ["Developer representative", "Useful coordination across construction details, finishes and operational systems."],
+];
+---
+
+<section class="section testimonials">
+  <div class="container">
+    <SectionHeading eyebrow="Testimonials" title="Placeholder client feedback ready for real reviews" text="These examples are intentionally generic placeholders and should be replaced with approved customer feedback." align="center" />
+    <div class="testimonial-track" aria-label="Placeholder testimonials">
+      {testimonials.map(([person, quote]) => (
+        <article class="testimonial" data-reveal>
+          <p>"{quote}"</p>
+          <strong>{person}</strong>
+          <span>Placeholder testimonial</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  align = "left",
+} = Astro.props as { eyebrow?: string; title: string; text?: string; align?: "left" | "center" };
+---
+
+<div class:list={["section-heading", align === "center" && "section-heading--center"]} data-reveal>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2>{title}</h2>
+  {text && <p>{text}</p>}
+</div>

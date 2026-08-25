@@ -1,0 +1,52 @@
+---
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import Button from "@/components/ui/Button.astro";
+import { imageLibrary } from "@/data/site";
+const features = [
+  {
+    title: "Swimming Pool Construction",
+    text: "End-to-end construction planning, waterproofing, tiling, equipment coordination, and handover.",
+    image: imageLibrary.construction,
+    alt: "Empty tiled swimming pool under construction for professional pool engineering",
+  },
+  {
+    title: "Swimming Pool Renovation",
+    text: "Modern refurbishment for aging pools, damaged finishes, layout upgrades, and better system performance.",
+    image: imageLibrary.renovation,
+    alt: "Renovated residential swimming pool with timber deck and clear blue water",
+  },
+  {
+    title: "Pool Leak Repair",
+    text: "Structured diagnosis and repair for visible or hidden water loss across pool shells and plumbing lines.",
+    image: imageLibrary.maintenance,
+    alt: "Pool technician cleaning and inspecting a commercial swimming pool",
+  },
+  {
+    title: "Jacuzzi Installation",
+    text: "Wellness installations shaped for homes, hotels, clubs, and premium leisure environments.",
+    image: imageLibrary.wellness,
+    alt: "Luxury outdoor hot tubs for spa and wellness engineering services",
+  },
+];
+---
+
+<section class="section featured">
+  <div class="container">
+    <SectionHeading eyebrow="Featured work" title="High-impact services for demanding pool projects" text="A focused look at the services clients most often need when pool performance, appearance, or reliability matters." />
+    <div class="featured-list">
+      {features.map(({ title, text, image, alt }, index) => (
+        <article class:list={["featured-item", index % 2 && "featured-item--reverse"]} data-reveal>
+          <div class="featured-item__image">
+            <img src={image} alt={alt} width="1200" height="800" loading="lazy" decoding="async" />
+          </div>
+          <div class="featured-item__content">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            <Button href="/contact#contact-form" label="Request this service" variant="ghost" />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
