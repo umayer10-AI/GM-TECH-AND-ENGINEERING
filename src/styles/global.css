@@ -666,7 +666,7 @@ textarea {
 
 .hero h1 {
   max-width: 850px;
-  font-size: clamp(2.8rem, 6.7vw, 5.35rem);
+  font-size: clamp(2.8rem, 5.7vw, 6rem);
 }
 
 .hero p {
